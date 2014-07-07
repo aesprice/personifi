@@ -9,7 +9,8 @@
         controller: 'MainController'
       });
   })
-  .controller('MainController', function ($state) {
+  .controller('MainController', function ($scope, $state) {
+    $scope.mood = '';
     $state.transitionTo('myApp.main.survey');
   });
 }(angular));

@@ -10,7 +10,7 @@
       });
   })
   .controller('MainController', function ($scope, $state) {
-    $scope.mood = '';
+    $scope.mood;
     $state.transitionTo('myApp.main.survey');
   });
 }(angular));

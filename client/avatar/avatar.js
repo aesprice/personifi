@@ -9,4 +9,7 @@ angular.module('myApp.main.avatar', ['ui.router'])
     });
 })
 .controller('AvatarController', function ($scope) {
+  $scope.emoteStyle = {
+    backgroundColor: 'rgb(' + Math.floor(255 * (1 - $scope.$parent.mood)) + ',128,' + Math.floor(255 * $scope.$parent.mood) + ')'
+  };
 });

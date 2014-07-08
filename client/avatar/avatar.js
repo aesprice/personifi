@@ -28,8 +28,10 @@ angular.module('myApp.main.avatar', ['ui.router'])
   $scope.emoteStyle = {};
   $scope.sendMood($scope.$parent.mood, function(data){
     $scope.serverMood = data.serverMood;
+    var y = Math.floor(191 * $scope.serverMood) + 64; // will be used for red and green, making yellow
+    var b = Math.floor(32 * (1 - $scope.serverMood)) + 128;
     $scope.emoteStyle = {
-      backgroundColor: 'rgb(' + Math.floor(255 * (1 - $scope.serverMood)) + ',128,' + Math.floor(255 * $scope.serverMood) + ')'
+      backgroundColor: 'rgb(' + y + ',' + y + ',' + b + ')'
     };
   });
 });

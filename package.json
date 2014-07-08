@@ -4,6 +4,7 @@
   "dependencies": {
     "express": "*",
     "mongoose": "*",
+    "ntwitter": "^0.5.0",
     "q": "*"
   },
   "devDependencies": {

@@ -9,6 +9,7 @@
 */
 
 var app   = require('./main/app.js'),
+    twit  = require('./main/twitStream.js'),
     port  = app.get('port'),
     log   = 'Listening on ' + app.get('base url') + ':' + port;
 

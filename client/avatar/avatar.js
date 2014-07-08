@@ -10,7 +10,7 @@ angular.module('myApp.main.avatar', ['ui.router'])
 })
 .factory('AvatarFactory', function($http){
   var methods = {};
-  methods.getServerMood = function(userMood, callback){
+  methods.sendMood = function(userMood, callback){
     var data = {userMood: userMood};
     $http.post('/mood', data)
       .success(function(data){
@@ -23,10 +23,10 @@ angular.module('myApp.main.avatar', ['ui.router'])
   return methods;
 })
 .controller('AvatarController', function ($scope, AvatarFactory) {
-  $scope.getServerMood = AvatarFactory.getServerMood;
+  $scope.sendMood = AvatarFactory.sendMood;
   $scope.serverMood;
   $scope.emoteStyle = {};
-  $scope.getServerMood($scope.$parent.mood, function(data){
+  $scope.sendMood($scope.$parent.mood, function(data){
     $scope.serverMood = data.serverMood;
     $scope.emoteStyle = {
       backgroundColor: 'rgb(' + Math.floor(255 * (1 - $scope.serverMood)) + ',128,' + Math.floor(255 * $scope.serverMood) + ')'

@@ -17,11 +17,7 @@ module.exports = exports = function (app, express, routers) {
   app.use(middle.cors);
   app.use(express.static(__dirname + '/../../client'));
   app.use('/note', routers.NoteRouter);
+  app.use('/mood', routers.MoodRouter);
   app.use(middle.logError);
   app.use(middle.handleError);
-
-  app.post('/mood', function(req, res){
-    var mood = req.body.userMood;
-    res.json({serverMood: mood});
-  });
 };

@@ -28,34 +28,31 @@ twit
     }
   })
   .stream('statuses/filter', {track: 'happy,sad'}, function(stream){
-    // stream.on('data', function(data){
-    //   console.log(data.text);
-    //   if(data.text.search(/(^|\W)happy(\W|$)/i) !== -1){
-    //     Mood.findOne({}, function(err, mood){
-    //       if(err){
-    //         console.error(err);
-    //       }else{
-    //         console.log(mood);
-    //         mood.positives++;
-    //         mood.save(function(err){
-    //           if(err) console.error(err);
-    //         })
-    //       }
-    //     });
-    //   }else if(data.text.search(/(^|\W)sad(\W|$)/i) !== -1){
-    //     Mood.findOne({}, function(err, mood){
-    //       if(err){
-    //         console.error(err);
-    //       }else{
-    //         console.log(mood);
-    //         mood.negatives++;
-    //         mood.save(function(err){
-    //           if(err) console.error(err);
-    //         })
-    //       }
-    //     });
-    //   }
-    // });
+    stream.on('data', function(data){
+      if(data.text.search(/(^|\W)happy(\W|$)/i) !== -1){
+        Mood.findOne({}, function(err, mood){
+          if(err){
+            console.error(err);
+          }else{
+            mood.positives++;
+            mood.save(function(err){
+              if(err) console.error(err);
+            })
+          }
+        });
+      }else if(data.text.search(/(^|\W)sad(\W|$)/i) !== -1){
+        Mood.findOne({}, function(err, mood){
+          if(err){
+            console.error(err);
+          }else{
+            mood.negatives++;
+            mood.save(function(err){
+              if(err) console.error(err);
+            })
+          }
+        });
+      }
+    });
   });
 
 module.exports = exports = twit;

@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 
 var MoodSchema = new mongoose.Schema({
-  value: Number,
+  text: String,
 });
 
 module.exports = exports = mongoose.model('moods', MoodSchema);

@@ -41,11 +41,27 @@ angular.module('myApp.main.avatar', ['ui.router'])
 .controller('AvatarController', function ($scope, AvatarFactory) {
   $scope.getMood = AvatarFactory.getMood;
   $scope.serverMood;
+  $scope.moodString;
   $scope.emoteStyle = {};
+  $scope.day = new Date().toDateString();
   $scope.getMood(function(data){
     $scope.serverMood = data.serverMood;
     var displayMood = AvatarFactory.weightedMood($scope.serverMood);
-    console.log(displayMood);
+    if(displayMood > 0.6){
+      if(displayMood > 0.8){
+        $scope.moodString = 'awesome!';
+      }else{
+        $scope.moodString = 'pretty good.';
+      }
+    }else if(displayMood < 0.4){
+      if(displayMood < 0.2){
+        $scope.moodString = 'just awful...';
+      }else{
+        $scope.moodString = 'pretty bad.';
+      }
+    }else{
+      $scope.moodString = 'meh.';
+    }
     var y = Math.floor(191 * displayMood) + 64; // will be used for red and green, making yellow
     var b = Math.floor(32 * (1 - displayMood)) + 128;
     $scope.emoteStyle = {

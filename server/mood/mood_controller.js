@@ -11,7 +11,18 @@ module.exports = exports = {
         if(err){
           console.error(err);
         }else{
-          res.json({serverMood: req.body.userMood});
+          Mood.find().select('value').exec(function(err, moodValues){
+            if(err){
+              console.error(err);
+            }else{
+              var avgMood = 0;
+              for(var i = 0; i < moodValues.length; i++){
+                avgMood += moodValues[i].value;
+              }
+              avgMood = avgMood/moodValues.length;
+              res.json({serverMood: avgMood});
+            }
+          });
         }
       });
     }

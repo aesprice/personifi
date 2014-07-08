@@ -20,7 +20,7 @@ angular.module('myApp.main.avatar', ['ui.router'])
       });
   };
   methods.weightedMood = function(mood){
-    var weight = 0.80;
+    var weight = 0.85;
     var wMood;
     if(mood > 0.6){
       wMood = mood / weight;

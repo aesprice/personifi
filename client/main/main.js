@@ -11,6 +11,6 @@
   })
   .controller('MainController', function ($scope, $state) {
     $scope.mood;
-    $state.transitionTo('myApp.main.survey');
+    $state.transitionTo('myApp.main.avatar');
   });
 }(angular));

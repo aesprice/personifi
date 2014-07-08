@@ -10,9 +10,9 @@ angular.module('myApp.main.avatar', ['ui.router'])
 })
 .factory('AvatarFactory', function($http){
   var methods = {};
-  methods.sendMood = function(userMood, callback){
-    var data = {userMood: userMood};
-    $http.post('/mood', data)
+  methods.getMood = function(userMood, callback){
+    // var data = {userMood: userMood};
+    $http.get('/mood')
       .success(function(data){
         callback(data);
       })
@@ -23,11 +23,12 @@ angular.module('myApp.main.avatar', ['ui.router'])
   return methods;
 })
 .controller('AvatarController', function ($scope, AvatarFactory) {
-  $scope.sendMood = AvatarFactory.sendMood;
+  $scope.getMood = AvatarFactory.getMood;
   $scope.serverMood;
   $scope.emoteStyle = {};
-  $scope.sendMood($scope.$parent.mood, function(data){
+  $scope.getMood($scope.$parent.mood, function(data){
     $scope.serverMood = data.serverMood;
+    console.log($scope.serverMood);
     var y = Math.floor(191 * $scope.serverMood) + 64; // will be used for red and green, making yellow
     var b = Math.floor(32 * (1 - $scope.serverMood)) + 128;
     $scope.emoteStyle = {

@@ -3,12 +3,21 @@
 var twitter = require('ntwitter');
 var Mood = require('../mood/mood_model.js');
 
-var twit = new twitter({
-  consumer_key: '',
-  consumer_secret: '',
-  access_token_key: '',
-  access_token_secret: ''
-});
+var credentials;
+if(!process.env.PORT){
+  // load local credentials when testing locally
+  // APP WILL NOT RUN WITHOUT PROPER TWITTER CREDENTIALS
+  credentials = require('./credentials.js');
+}else{
+  credentials = {
+    consumer_key: process.env.TWIT_KEY,
+    consumer_secret: process.env.TWIT_SEC,
+    access_token_key: process.env.TWIT_TOK_KEY,
+    access_token_secret: process.env.TWIT_TOK_SEC
+  }
+}
+
+var twit = new twitter(credentials);
 
 Mood.findOne({}, function(err, mood){
   if(err){
@@ -23,7 +32,6 @@ twit
     if(err){
       console.error(err);
     }else{
-      // console.log(data);
       console.log('Confirmed Twitter connection');
     }
   })
